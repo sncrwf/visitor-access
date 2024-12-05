@@ -1,8 +1,9 @@
 window.onload = function() {
   //<editor-fold desc="Changeable Configuration Block">
 
+  // the following lines will be replaced by docker/configurator, when it runs in a docker-container
   window.ui = SwaggerUIBundle({
-    url: "../swagger.json", // Path to your Swagger JSON file
+    url: "../swagger.json",
     dom_id: '#swagger-ui',
     deepLinking: true,
     presets: [
@@ -12,13 +13,7 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout",
-
-    // Add a requestInterceptor to set the Origin header
-    requestInterceptor: (request) => {
-      request.headers.Origin = "https://quentincloudsnow.github.io"; // Replace with your origin URL
-      return request;
-    }
+    layout: "StandaloneLayout"
   });
 
   //</editor-fold>
