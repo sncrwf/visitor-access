@@ -16,7 +16,7 @@ window.onload = function() {
 
     // Add a requestInterceptor to set the Origin header
     requestInterceptor: (request) => {
-      request.headers.Origin = "https://sncrwf.github.io"; // Replace with your origin URL
+      request.headers.Origin = "https://quentincloudsnow.github.io"; // Replace with your origin URL
       return request;
     }
   });
