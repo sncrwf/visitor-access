@@ -1,14 +1,24 @@
-new SwaggerUI({
-  url: "https://sncrwf.github.io/visitor-access/swagger.json", // Replace with your Swagger spec URL
-  dom_id: '#swagger-ui',
-  deepLinking: true,
-  presets: [
-    SwaggerUI.presets.apis,
-    SwaggerUI.SwaggerUIStandalonePreset
-  ],
-  requestInterceptor: (req) => {
-    const proxyUrl = "https://cors-anywhere.herokuapp.com"; // Use a public proxy or your custom proxy
-    req.url = `${proxyUrl}/${req.url}`; // Prepend the proxy URL to the request
-    return req;
-  },
-});
+window.onload = function() {
+  window.ui = SwaggerUIBundle({
+    url: "../swagger.json", // Path to your Swagger spec
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout",
+
+    // Add a requestInterceptor to include custom headers
+    requestInterceptor: (request) => {
+      // Add custom CORS headers
+      request.headers['Access-Control-Allow-Origin'] = '*';
+      request.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+      request.headers['Access-Control-Allow-Headers'] = 'Content-Type';
+      return request;
+    }
+  });
+};
