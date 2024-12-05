@@ -1,15 +1,14 @@
-window.onload = function() {
-  window.ui = SwaggerUIBundle({
-    url: "https://crossorigin.me/https://sncrwf.github.io/visitor-access/swagger.json",
-    dom_id: '#swagger-ui',
-    deepLinking: true,
-    presets: [
-      SwaggerUIBundle.presets.apis,
-      SwaggerUIStandalonePreset
-    ],
-    plugins: [
-      SwaggerUIBundle.plugins.DownloadUrl
-    ],
-    layout: "StandaloneLayout"
-  });
-};
+new SwaggerUI({
+  url: "https://sncrwf.github.io/visitor-access/swagger.json", // Replace with your Swagger spec URL
+  dom_id: '#swagger-ui',
+  deepLinking: true,
+  presets: [
+    SwaggerUI.presets.apis,
+    SwaggerUI.SwaggerUIStandalonePreset
+  ],
+  requestInterceptor: (req) => {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com"; // Use a public proxy or your custom proxy
+    req.url = `${proxyUrl}/${req.url}`; // Prepend the proxy URL to the request
+    return req;
+  },
+});
